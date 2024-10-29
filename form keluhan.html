@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Keluhan</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 700px;
+            margin-top: 30px;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .form-check-label {
+            font-weight: normal;
+        }
+        .suggestions {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .suggestions h5 {
+            color: #007bff;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+    <script>
+        function tampilkanSaran() {
+            const keluhanDipilih = document.querySelectorAll('input[type="checkbox"]:checked');
+            const hasilSaran = document.getElementById("hasilSaran");
+            const btnSelesai = document.getElementById("btnSelesai");
+            hasilSaran.innerHTML = ""; // Kosongkan saran sebelumnya
+            btnSelesai.style.display = "none"; // Sembunyikan tombol "Selesai" awalnya
+
+            if (keluhanDipilih.length === 0) {
+                hasilSaran.innerHTML = "<p class='text-danger'>Pilih setidaknya satu keluhan untuk melihat saran.</p>";
+                return;
+            }
+
+            keluhanDipilih.forEach(keluhan => {
+                const saranKategori = document.getElementById(`saran-${keluhan.value}`);
+                if (saranKategori) {
+                    hasilSaran.innerHTML += `<h5>${keluhan.value}</h5>${saranKategori.innerHTML}<hr>`;
+                }
+            });
+
+            // Tampilkan tombol "Selesai" setelah saran muncul
+            btnSelesai.style.display = "block";
+        }
+
+        function goToNextPage() {
+            window.location.href = "selesai_new.html"; // Ganti dengan nama file halaman yang diinginkan
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Form Keluhan dan Saran</h2>
+        </div>
+        <p class="text-center"><strong>Checklist keluhan yang sering (boleh lebih dari satu):</strong></p>
+        <form>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keluhan1" value="Dispepsi Fungsional">
+                <label class="form-check-label" for="keluhan1">Nyeri ulu hati, mual atau muntah dan perut kembung</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keluhan2" value="Sindrom Kolon Iritabel">
+                <label class="form-check-label" for="keluhan2">Diare, sakit atau kram perut dan kembung</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keluhan3" value="Penyakit Jantung Fungsional">
+                <label class="form-check-label" for="keluhan3">Khawatir berlebih menderita penyakit (misal jantung)</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keluhan4" value="Nyeri Psikogenik">
+                <label class="form-check-label" for="keluhan4">Nyeri tubuh tertentu tanpa penyakit mendasari</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keluhan5" value="Gangguan Fatigue">
+                <label class="form-check-label" for="keluhan5">Kelelahan dan keletihan meski tidur cukup</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keluhan6" value="Dermatitis a topic">
+                <label class="form-check-label" for="keluhan6">Kulit gatal dan kemerahan (eksim)</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keluhan7" value="Tension Headache">
+                <label class="form-check-label" for="keluhan7">Sakit kepala tegang atau migraine</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keluhan8" value="Low Back Pain">
+                <label class="form-check-label" for="keluhan8">Nyeri dada, punggung dan tulang belakang</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keluhan9" value="Psoriasis">
+                <label class="form-check-label" for="keluhan9">Sesak nafas mengi (asma)</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="keluhan10" value="Sindroma Metabolik">
+                <label class="form-check-label" for="keluhan10">Kadar gula darah dan kadar kolesterol tinggi, hipertensi disertai lemak berlebihan di pinggang</label>
+            </div>
+            <button type="button" class="btn btn-custom mt-3" onclick="tampilkanSaran()">Tampilkan Saran</button>
+        </form>
+
+        <div class="suggestions mt-4" id="hasilSaran"></div>
+        <button id="btnSelesai" class="btn btn-success mt-3" style="display:none;" onclick="goToNextPage()">Selesai</button>
+    </div>
+
+    <!-- Saran yang tersembunyi -->
+    <div style="display: none;">
+        <div id="saran-Dispepsi Fungsional">
+            <ol>
+                <li>Makan porsi kecil 5 – 6 kali, kunyah sebelum ditelan, hindari pedas, lemak, soda, cafein dan alkohol</li>
+                <li>Hindari analgerik seperti aspirin dan ibuprofen</li>
+                <li>Atasi stres dan rasa cemas</li>
+                <li>Olahraga, relaksasi, cukup tidur dan BB ideal</li>
+                <li>Kontrol ke klinik dan minum obat sesuai instruksi</li>
+            </ol>
+        </div>
+        <div id="saran-Sindrom Kolon Iritabel">
+            <ol>
+                <li>Minum yoghurt untuk menyeimbangkan bakteri usus</li>
+                <li>Makanan tinggi serat dan banyak minum air putih</li>
+                <li>Olahraga seperti bersepeda untuk meningkatkan gerak usus</li>
+                <li>Atasi stres dengan relaksasi dan psikoterapi</li>
+                <li>Bila perlu beri pencahar, atau suplemen serat</li>
+                <li>Untuk mengatasi stres dan cemas dapat diberi anticemas atau antidepresan</li>
+                <li>Kontrol ke Rumah Sakit teratur dan minum obat sesuai instruksi dokter</li>
+            </ol>
+        </div>
+        <div id="saran-Penyakit Jantung Fungsional">
+            <ol>
+                <li>Menyadari beda anatara kekhawatiran dan  keluhan sakit  jantung</li>
+                <li>Cari penyebab kekhawatiran apakah ada kerabat  yang sakit dan meninggal</li>
+                <li>Ajari mengenali emosinya dan coping mechanism yang sehat </li>
+                <li>Untuk mengatasi  stres dan cemas dapat diberi  anticemas atau antidepresan</li>
+                <li>Kontrol ke Rumah Sakit teratur dan minum obat sesuai instruksi dokter</li>
+            </ol>
+        </div>
+        <div id="saran-Nyeri Psikogenik">
+            <ol>
+                <li>Disarankan konseling atau psikoterapi dan Kognitif behavior terapi </li>
+                <li>Hindari pemeriksaan medis berulang yang tidak diperlukan </li>
+                <li>Eksplorasi faktor psikologis yang melatarbeloakangi;  depresi terselubung </li>
+                <li>Bila ada gejala psikotik  obati dengan  antipsikotik </li>
+            </ol>
+        </div>
+        <div id="saran-Gangguan Fatigue">
+            <ol>
+                <li>Olahraga seperti berjalan kaki, bersepeda, atau berenang.</li>
+                <li>Aktivitas fisik 3 X / minggu dengan durasi 30 menit  </li>
+                <li>Minum air putih 8 gelas / hari, hindari alkohol dan kafein</li>
+                <li>Makan teratur, bergizi  dan tepat waktu . </li>
+                <li>Kelola stres, relaks, rekreasi, camping dsb  </li>
+                <li>Jaga berat badan dan tidur  6 - 8 jam / hari dimalam hari.</li>
+                <li>Kontrol ke Rumah Sakit teratur dan minum obat sesuai instruksi dokter</li>
+            </ol>
+        </div>
+        <div id="saran-Dermatitis a topic">
+            <ol>
+                <li>Hindari penyebab iritasi </li>
+                <li>Gunakan pelembap kulit agar  tidak kering </li>
+                <li>Gunakan kompres untuk meredakan rasa gatal</li>
+                <li>Hindari menggaruk area dermatitis kontak</li>
+                <li>Lindungi tangan dengan membilas dan mengeringkan</li>
+                <li>Kontrol ke Rumah Sakit teratur dan minum obat sesuai instruksi dokter</li>
+            </ol>
+        </div>
+        <div id="saran-Tension Headache">
+            <ol>
+                <li>Istirahat di ruang gelap dan tenang . </li>
+                <li>Kelola stres dengan meditasi relaksasi atau yoga. </li>
+                <li>Hindari penyebab stres  </li>
+                <li>Kompres dengan air hangat atau dingin</li>
+                <li>Meregangkan leher, punggung, dan bahu.</li>
+                <li>Makanan mengandung Kalium, kentang rebus</li>
+                <li>Kontrol ke Rumah Sakit teratur dan minum obat sesuai instruksi dokter</li>
+            </ol>
+        </div>
+        <div id="saran-Low Back Pain">
+            <ol>
+                <li>Kompres dingin pada punggung yang terasa nyeri selama 10 menit. .</li>
+                <li>Obat pereda nyeri, untuk mengatasi rasa nyeri yang timbul.</li>
+                <li>Obat pelemas otot, seperti clonazepam dan chlorzoxazone, untuk mengurangi ketegangan otot pada bagian punggung bawah.</li>
+                <li>Kontrol ke Rumah Sakit teratur dan minum obat sesuai instruksi dokter</li>
+            </ol>
+        </div>
+        <div id="saran-Psoriasis">
+            <ol>
+                <li>Berjemur matahari yang lembut</li>
+                <li>Jaga kebersihan kulit </li>
+                <li>Hindari infeksi oleh bakteri.</li>
+                <li>Menghindari cedera kulit dan kulit kering</li>
+                <li>Kontrol ke Rumah Sakit teratur dan minum obat sesuai instruksi dokter</li>
+            </ol>
+        </div>
+        <div id="saran-Sindroma Metabolik">
+            <ol>
+                <li>Banyak makan buah, sayur,bijian,susu rendah lemak, daging tanpa lemak</li>
+                <li>Batasi makanan olahan, daging lemak jenuh </li>
+                <li>Konsumsi daging merah, natrium dan gula tambahan.</li>
+                <li>Berolahraga setidaknya 150 menit / minggu</li>
+                <li>Turunkan berat badan</li>
+                <li>Kontrol ke Rumah Sakit teratur dan minum obat sesuai instruksi dokter</li>
+            </ol>
+        </div>
+
+        <!-- Tambahkan div untuk kategori saran lainnya sesuai dengan format di atas -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

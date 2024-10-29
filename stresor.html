@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IV. Stresor Psikososial</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .title {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            border-radius: 0.25rem;
+        }
+        .saran {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            margin-top: 20px;
+            border-radius: 0.25rem;
+        }
+        .radio-group {
+            display: flex;
+            gap: 10px; /* Space between radio buttons */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h1 class="title">IV. Stresor Psikososial</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead text-center">
+                    Pilih Jawaban: <strong>Ya, Tidak</strong>
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Stresor</th>
+                            <th>Jawaban</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. Stres ditempat kerja</td>
+                            <td>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="stresKerja" value="Ya"> Ya</label>
+                                    <label><input type="radio" name="stresKerja" value="tidak"> Tidak</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2. Stres perkawinan</td>
+                            <td>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="stresPerkawinan" value="Ya"> Ya</label>
+                                    <label><input type="radio" name="stresPerkawinan" value="tidak"> Tidak</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3. Keterbatasan finansial</td>
+                            <td>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="keterbatasanFinansial" value="Ya"> Ya</label>
+                                    <label><input type="radio" name="keterbatasanFinansial" value="tidak"> Tidak</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button type="button" class="btn btn-primary mt-3" onclick="tampilkanSaran()">Tampilkan Saran</button>
+                <div id="saran" class="saran d-none"></div>
+
+                <a href="kebiasaan1.html" class="btn btn-secondary mt-3">Selanjutnya</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function tampilkanSaran() {
+            let saran = '<h5>Saran berdasarkan Stresor Psikososial:</h5>';
+            let stresKerja = document.querySelector('input[name="stresKerja"]:checked');
+            let stresPerkawinan = document.querySelector('input[name="stresPerkawinan"]:checked');
+            let keterbatasanFinansial = document.querySelector('input[name="keterbatasanFinansial"]:checked');
+
+            if (stresKerja && stresKerja.value === "Ya") {
+                saran += `<p><strong>Stres Kerja:</strong><ul>
+                    <li>Kenali batas kemampuan sehingga dapat mengoptimalkan waktu; menghindari kelelahan berlebihan.</li>
+                    <li>Sharing dengan rekan kerja dapat menciptakan suasana kerja yang lebih positif dan nyaman.</li>
+                    <li>Lupakan pekerjaan sejenak untuk memulihkan pikiran dan tenaga, seperti menonton film, karaoke, berkebun.</li>
+                    <li>Jaga pola hidup, cukup istirahat, konsumsi vitamin, dan makanan bergizi.</li>
+                    <li>Berolahraga dapat melindungi kesehatan fisik dan mental.</li>
+                    <li>Mindfulness: duduk dengan posisi nyaman, bernapas biasa, fokus pada setiap tarikan dan hembusan napas.</li>
+                </ul></p>`;
+            } else if (stresKerja && stresKerja.value === "tidak") {
+                saran += `<p><strong>Stres Kerja:</strong> Anda telah menjaga manajemen stres di tempat kerja dengan baik. Pertahankan konsistensi ini untuk kesehatan mental dan fisik.</p>`;
+            }
+
+            if (stresPerkawinan && stresPerkawinan.value === "Ya") {
+                saran += `<p><strong>Konflik Perkawinan:</strong><ul>
+                    <li>Konflik biasanya terjadi karena masalah komunikasi, beda pendapat, kekerasan, atau kehidupan seksual.</li>
+                    <li>Usahakan memahami kebutuhan pasangan dan komunikasikan dengan baik untuk menghindari kesalahpahaman.</li>
+                    <li>Cobalah untuk saling mendengarkan dan mencari solusi bersama.</li>
+                </ul></p>`;
+            } else if (stresPerkawinan && stresPerkawinan.value === "tidak") {
+                saran += `<p><strong>Konflik Perkawinan:</strong> Hubungan perkawinan Anda terjaga baik. Teruskan pola komunikasi positif dan pengertian dalam hubungan Anda.</p>`;
+            }
+
+            if (keterbatasanFinansial && keterbatasanFinansial.value === "Ya") {
+                saran += `<p><strong>Keterbatasan Finansial:</strong><ul>
+                    <li>Mengelola keuangan lebih bijak dan buat perencanaan keuangan keluarga.</li>
+                    <li>Terapkan hidup hemat dan sederhana serta cari tambahan dengan kerja lembur atau usaha tambahan.</li>
+                    <li>Gunakan fasilitas yang ada seperti BPJS untuk jaminan berobat.</li>
+                </ul></p>`;
+            } else if (keterbatasanFinansial && keterbatasanFinansial.value === "tidak") {
+                saran += `<p><strong>Keterbatasan Finansial:</strong> Pengelolaan keuangan Anda cukup baik. Terus lakukan perencanaan keuangan yang sehat untuk stabilitas di masa depan.</p>`;
+            }
+
+            document.getElementById('saran').innerHTML = saran;
+            document.getElementById('saran').classList.remove('d-none');
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

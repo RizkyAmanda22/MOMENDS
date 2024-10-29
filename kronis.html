@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penyakit Kronik</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .title {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            border-radius: 0.25rem;
+        }
+        .saran {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            margin-top: 20px;
+            border-radius: 0.25rem;
+        }
+        .form-check-inline {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h1 class="title">III. Penyakit Kronik</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead text-center">
+                    Pilih <strong>Ya, Tidak, atau Tidak Tahu</strong>
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Penyakit</th>
+                            <th>Jawaban</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. Jantung</td>
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="jantung" id="jantungYa" value="Ya"> Ya
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="jantung" id="jantungTidak" value="Tidak"> Tidak
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="jantung" id="jantungTidakTahu" value="Tidak Tahu"> Tidak Tahu
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2. Stroke</td>
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="stroke" id="strokeYa" value="Ya"> Ya
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="stroke" id="strokeTidak" value="Tidak"> Tidak
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="stroke" id="strokeTidakTahu" value="Tidak Tahu"> Tidak Tahu
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3. Diabetes</td>
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="diabetes" id="diabetesYa" value="Ya"> Ya
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="diabetes" id="diabetesTidak" value="Tidak"> Tidak
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="diabetes" id="diabetesTidakTahu" value="Tidak Tahu"> Tidak Tahu
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button type="button" class="btn btn-primary mt-3" onclick="tampilkanSaran()">Tampilkan Saran</button>
+                <div id="saran" class="saran d-none"></div>
+
+                <a href="stresor.html" class="btn btn-secondary mt-3">Selanjutnya</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function tampilkanSaran() {
+            let saran = '<h5>Saran untuk Mengatasi Penyakit Kronik:</h5>';
+            let penyakit = [
+                { nama: "Jantung", value: document.querySelector('input[name="jantung"]:checked')?.value },
+                { nama: "Stroke", value: document.querySelector('input[name="stroke"]:checked')?.value },
+                { nama: "Diabetes", value: document.querySelector('input[name="diabetes"]:checked')?.value }
+            ];
+
+            penyakit.forEach(p => {
+                if (p.value) {
+                    saran += `<p><strong>${p.nama}</strong>:`;
+                    if (p.value === "Ya") {
+                        switch (p.nama) {
+                            case "Jantung":
+                                saran += `<ul>
+                                            <li>Kontrol ke klinik dan minum obat sesuai instruksi dokter.</li>
+                                            <li>Batasi garam dan hindari makanan berlemak (darah tinggi).</li>
+                                            <li>Kurangi karbohidrat, pedas, dan gorengan (obesitas).</li>
+                                            <li>Hindari nikotin, kopi, dan alkohol.</li>
+                                          </ul>`;
+                                break;
+                            case "Stroke":
+                                saran += `<ul>
+                                            <li>Kontrol ke klinik dan minum obat sesuai instruksi dokter.</li>
+                                            <li>Makan banyak sayur dan buah.</li>
+                                            <li>Kurangi makanan asin, manis, dan gurih.</li>
+                                            <li>Olahraga secara teratur, seperti aerobic seminggu 3 kali.</li>
+                                          </ul>`;
+                                break;
+                            case "Diabetes":
+                                saran += `<ul>
+                                            <li>Periksa kadar gula darah secara teratur.</li>
+                                            <li>Kontrol ke klinik dan minum obat sesuai instruksi dokter.</li>
+                                            <li>Berolahraga teratur dan terukur.</li>
+                                            <li>Konsumsi buah, sayur, dan biji-bijian berserat.</li>
+                                            <li>Kurangi daging dan lemak, pilih ikan atau ayam.</li>
+                                            <li>Kurangi konsumsi gula dan garam.</li>
+                                            <li>Pilih gandum, sereal, minyak olive atau bunga matahari.</li>
+                                            <li>Hindari rokok dan alkohol.</li>
+                                          </ul>`;
+                                break;
+                        }
+                    } else if (p.value === "Tidak") {
+                        saran += `<ul><li>Jaga pola hidup sehat untuk mencegah munculnya penyakit kronik.</li></ul>`;
+                    } else if (p.value === "Tidak Tahu") {
+                        saran += `<ul><li>Disarankan untuk melakukan pemeriksaan lebih lanjut di klinik untuk memastikan kondisi kesehatan.</li></ul>`;
+                    }
+                    saran += '</p>';
+                }
+            });
+
+            document.getElementById('saran').innerHTML = saran;
+            document.getElementById('saran').classList.remove('d-none');
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

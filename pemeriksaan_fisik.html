@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemeriksaan Fisik</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .title {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            border-radius: 0.25rem;
+        }
+        .saran {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            margin-top: 20px;
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h1 class="title">Pemeriksaan Fisik</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead text-center">
+                    Silakan isi hasil pemeriksaan fisik Anda.
+                </p>
+
+                <form id="fisikForm">
+                    <h2 class="mt-4">II. Pemeriksaan Fisik</h2>
+
+                    <div class="form-group">
+                        <label for="tekananDarah">1. Tekanan darah (Mm Hg, format: sistolik/diastolik)</label>
+                        <input type="text" class="form-control" id="tekananDarah" placeholder="Masukkan Tekanan Darah Anda (misal: 120/80)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tinggiBadan">2. Tinggi badan (Cm)</label>
+                        <input type="number" class="form-control" id="tinggiBadan" placeholder="Masukkan Tinggi Badan Anda" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="beratBadan">3. Berat badan (Kg)</label>
+                        <input type="number" class="form-control" id="beratBadan" placeholder="Masukkan Berat Badan Anda" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bmi">4. BMI (Body Mass Index)</label>
+                        <input type="number" class="form-control" id="bmi" placeholder="BMI akan dihitung otomatis" readonly>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="tampilkanSaran()">Tampilkan Saran</button>
+                </form>
+
+                <div id="saran" class="saran d-none"></div>
+                <a href="kronis.html" class="btn btn-secondary mt-3">Selanjutnya</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function tampilkanSaran() {
+            const tekananDarahInput = document.getElementById('tekananDarah').value;
+            const tinggiBadan = document.getElementById('tinggiBadan').value;
+            const beratBadan = document.getElementById('beratBadan').value;
+
+            let sistolik = null;
+            let diastolik = null;
+
+            if (tekananDarahInput) {
+                const tekananDarahArr = tekananDarahInput.split('/');
+                if (tekananDarahArr.length === 2) {
+                    sistolik = parseInt(tekananDarahArr[0]);
+                    diastolik = parseInt(tekananDarahArr[1]);
+                }
+            }
+
+            const tinggiMeter = tinggiBadan / 100;
+            const bmi = (beratBadan / (tinggiMeter * tinggiMeter)).toFixed(2);
+            document.getElementById('bmi').value = bmi;
+
+            let saran = '';
+
+            if (sistolik && diastolik) {
+                if (sistolik >= 140 || diastolik >= 90) {
+                    saran += '<p><strong>Tekanan darah tinggi:</strong></p>';
+                    saran += '<ul><li>Kontrol ke klinik dan periksa tekanan darah secara teratur.</li>';
+                    saran += '<li>Minumlah obat secara teratur, sesuai instruksi dokter.</li>';
+                    saran += '<li>Berolahraga teratur dan terukur.</li>';
+                    saran += '<li>Hindari makanan asin, cepat saji, kaleng, dan penyedap.</li></ul>';
+                } else if (sistolik < 90 || diastolik < 60) {
+                    saran += '<p><strong>Tekanan darah rendah:</strong></p>';
+                    saran += '<ul><li>Konsultasikan ke dokter mengenai pola makan dan gaya hidup.</li>';
+                    saran += '<li>Pastikan asupan garam dan air cukup setiap hari.</li></ul>';
+                } else {
+                    saran += '<p><strong>Tekanan darah normal:</strong></p>';
+                    saran += '<p>Lanjutkan gaya hidup sehat dan periksa tekanan darah secara berkala.</p>';
+                }
+            } else {
+                saran += '<p><strong>Informasi tekanan darah tidak tersedia:</strong></p>';
+                saran += '<p>Silakan periksa tekanan darah Anda secara berkala untuk informasi kesehatan yang lebih lengkap.</p>';
+            }
+
+            if (bmi < 18.5) {
+                saran += '<p><strong>Berat badan kurang (thinness):</strong></p>';
+                saran += '<ul><li>Disarankan menjalani program perbaikan nutrisi.</li></ul>';
+            } else if (bmi >= 25) {
+                saran += '<p><strong>Berat badan berlebih (obese):</strong></p>';
+                saran += '<ul><li>Konsumsi sayur dan buah.</li>';
+                saran += '<li>Batasi tidur berlebihan.</li>';
+                saran += '<li>Tingkatkan aktivitas minimal 30 menit per hari.</li>';
+                saran += '<li>Batasi nonton televisi, main komputer, dan games.</li>';
+                saran += '<li>Batasi konsumsi gula, garam, dan lemak.</li></ul>';
+            } else {
+                saran += '<p><strong>Berat badan normal:</strong></p>';
+                saran += '<p>Terus pertahankan pola makan dan olahraga teratur.</p>';
+            }
+
+            document.getElementById('saran').innerHTML = saran;
+            document.getElementById('saran').classList.remove('d-none');
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

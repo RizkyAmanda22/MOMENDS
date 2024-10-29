@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebiasaan</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .title {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            border-radius: 0.25rem;
+        }
+        .saran {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #ced4da;
+            margin-top: 20px;
+            border-radius: 0.25rem;
+        }
+        .form-check-inline {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h1 class="title">V. Kebiasaan</h1>
+            </div>
+            <div class="card-body">
+                <p class="lead text-center">
+                    Pilih <strong>Ya, Tidak</strong>
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Kebiasaan</th>
+                            <th>Jawaban</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. Olahraga</td>
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="olahraga" id="olahragaYa" value="Ya"> Ya
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="olahraga" id="olahragaTidak" value="Tidak"> Tidak
+                                </div>
+                                
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2. Merokok</td>
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="merokok" id="merokokYa" value="Ya"> Ya
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="merokok" id="merokokTidak" value="Tidak"> Tidak
+                                </div>
+                                
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3. Tidur larut</td>
+                            <td>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="tidur" id="tidurYa" value="Ya"> Ya
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="tidur" id="tidurTidak" value="Tidak"> Tidak
+                                </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button type="button" class="btn btn-primary mt-3" onclick="tampilkanSaran()">Tampilkan Saran</button>
+                <div id="saran" class="saran d-none"></div>
+                <a href="dass21n.html" class="btn btn-secondary mt-3">Selanjutnya</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function tampilkanSaran() {
+            let saran = '<h5>Saran untuk Mengatasi Kebiasaan:</h5>';
+            let kebiasaan = [
+                { nama: "Olahraga", value: document.querySelector('input[name="olahraga"]:checked')?.value },
+                { nama: "Merokok", value: document.querySelector('input[name="merokok"]:checked')?.value },
+                { nama: "Tidur larut", value: document.querySelector('input[name="tidur"]:checked')?.value }
+            ];
+
+            kebiasaan.forEach(k => {
+                if (k.value) {
+                    saran += `<p><strong>${k.nama}</strong>:`;
+                    if (k.value === "Ya") {
+                        switch (k.nama) {
+                            case "Olahraga":
+                                saran += `<ul>
+                                            <li>Olahraga menurunkan tekanan darah dan kolesterol serta menjaga kebugaran fisik.</li>
+                                            <li>Untuk yang jarang berolahraga, disarankan latihan aerobik 3 kali seminggu.</li>
+                                          </ul>`;
+                                break;
+                            case "Merokok":
+                                saran += `<ul>
+                                            <li>Bagi perokok, segera hentikan kebiasaan merokok; yang tidak merokok, jangan coba-coba.</li>
+                                            <li>Niat adalah langkah awal untuk berhenti.</li>
+                                          </ul>`;
+                                break;
+                            case "Tidur larut":
+                                saran += `<ul>
+                                            <li>Buat suasana kamar yang nyaman untuk tidur.</li>
+                                            <li>Rangsang kantuk dengan membaca atau mendengarkan musik tenang.</li>
+                                          </ul>`;
+                                break;
+                        }
+                    } else if (k.value === "Tidak") {
+                        switch (k.nama) {
+                            case "Olahraga":
+                                saran += `<ul>
+                                            <li>Disarankan untuk mulai berolahraga secara rutin agar kesehatan tubuh terjaga.</li>
+                                            <li>Coba lakukan olahraga ringan seperti jalan kaki atau yoga sebagai permulaan.</li>
+                                          </ul>`;
+                                break;
+                            case "Merokok":
+                                saran += `<ul>
+                                            <li>Bagus! Mempertahankan kebiasaan tidak merokok membantu menjaga kesehatan paru-paru.</li>
+                                            <li>Pertahankan gaya hidup sehat ini dan hindari lingkungan yang memicu keinginan merokok.</li>
+                                          </ul>`;
+                                break;
+                            case "Tidur larut":
+                                saran += `<ul>
+                                            <li>Memiliki waktu tidur yang teratur dapat meningkatkan kualitas istirahat dan produktivitas.</li>
+                                            <li>Upayakan untuk tidur dan bangun pada jam yang sama setiap hari.</li>
+                                          </ul>`;
+                                break;
+                        }
+                    ///} else if (k.value === "Tidak Tahu") {
+                       // saran += `<ul><li>Disarankan konsultasi lebih lanjut untuk memastikan kondisi kebiasaan tersebut.</li></ul>`;
+                    }
+                    saran += '</p>';
+                }
+            });
+
+            if (saran !== '<h5>Saran untuk Mengatasi Kebiasaan:</h5>') {
+                document.getElementById('saran').innerHTML = saran;
+                document.getElementById('saran').classList.remove('d-none');
+            } else {
+                document.getElementById('saran').classList.add('d-none');
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
